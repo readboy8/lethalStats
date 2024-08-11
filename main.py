@@ -1,12 +1,25 @@
 import tkinter as tk
 from tkinter import ttk
 
+totalCredits = {
+    'Experimentation': 0,
+    'Assurance': 0,
+    'Vow': 0,
+    'Offense': 0,
+    'March': 0,
+    'Adamance': 0,
+    'Rend': 0,
+    'Dine': 0,
+    'Titan': 0,
+    'Artifice': 0,
+    'Embrion': 0
+}
 
 class App():
     def __init__(self):
         self.root = tk.Tk()
 
-        self.root.geometry('500x500')
+        self.root.geometry('1000x500')
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(self.root, background='white')
         self.mainframe.pack(fill='both', expand=True)
