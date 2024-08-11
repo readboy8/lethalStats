@@ -22,6 +22,13 @@ class App():
         set_moon_button = ttk.Button(self.mainframe, text='Set Moon', command=self.set_moon)
         set_moon_button.grid(row=1, column=1, pady=10)
 
+        #Input money from last run
+        self.money_input_text = ttk.Label(self.mainframe, text='Credits On Last Run', background='white', font=('Arial', 10))
+        self.money_input_text.grid(row=3, column=2)
+        self.set_money_field = ttk.Entry(self.mainframe)
+        self.set_money_field.grid(row=3, column=0, pady=10, sticky='NWES')
+        set_latest_credits_button = ttk.Button(self.mainframe, text='Confirm', command=self.latest_run_money)
+        set_latest_credits_button.grid(row=3, column=1, pady=10)
 
         self.root.mainloop()
         return
@@ -29,6 +36,9 @@ class App():
     def set_moon(self):
         current_moon = self.set_moon_field.get()
         self.top_text.config(text=current_moon)
+
+    def latest_run_money(self):
+        print('nerd')
 
 
 if __name__ == '__main__':
