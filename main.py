@@ -38,7 +38,6 @@ set_moon_field.grid(row=1, column=0, sticky='NWES', pady=10)
 
 
 def set_moon(event):
-    print("Moon Selected")
     selected_moon = set_moon_field.get()
     top_text.config(text=selected_moon)
 
