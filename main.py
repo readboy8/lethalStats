@@ -16,6 +16,13 @@ totalCredits = {
 }
 
 class App():
+
+    def set_moon(self):
+        current_moon = self.set_moon_field.get()
+        self.top_text.config(text=current_moon)
+
+    def latest_run_money(self):
+        totalCredits["placeholder"] += 1
     def __init__(self):
         self.root = tk.Tk()
 
@@ -30,10 +37,11 @@ class App():
 
         #moon selector
         moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan', 'Artifice', 'Embrion']
-        self.set_moon_field = ttk.Combobox(self.mainframe, values=moon_options)
+        self.set_moon_field = ttk.Combobox(self.mainframe, values=moon_options, state='readonly')
         self.set_moon_field.grid(row=1, column=0, sticky='NWES', pady=10)
         set_moon_button = ttk.Button(self.mainframe, text='Set Moon', command=self.set_moon)
         set_moon_button.grid(row=1, column=1, pady=10)
+
 
         #Input money from last run
         self.money_input_text = ttk.Label(self.mainframe, text='Credits On Last Run', background='white', font=('Arial', 10))
@@ -45,13 +53,6 @@ class App():
 
         self.root.mainloop()
         return
-
-    def set_moon(self):
-        current_moon = self.set_moon_field.get()
-        self.top_text.config(text=current_moon)
-
-    def latest_run_money(self):
-        print('nerd')
 
 
 if __name__ == '__main__':
