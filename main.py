@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 from tkinter import ttk
+import re
 
 totalCredits = {
     'Experimentation': 0,
@@ -16,7 +17,6 @@ totalCredits = {
     'Embrion': 0
 }
 
-
 def latest_run_money():
     moon = set_moon_field.get()
     if moon == '':
@@ -25,6 +25,7 @@ def latest_run_money():
         credits = set_money_field.get()
         totalCredits[moon] += int(credits)
         print(totalCredits)
+        set_money_field.delete(0, 'end')
 
 
 root = tk.Tk()
