@@ -1,5 +1,4 @@
 import tkinter as tk
-import json
 from tkinter import ttk
 import pickle
 
@@ -16,7 +15,6 @@ def latest_run_money():
 
 
 def save():
-    #save_json = json.dumps(totalCredits, indent=4)
     with open("./saves/totalCredits.lethalStat", "wb") as outfile:
         pickle.dump(totalCredits, outfile)
 
@@ -99,11 +97,11 @@ set_money_field.grid(row=3, column=0, pady=10, sticky='NWES')
 set_latest_credits_button = ttk.Button(mainframe, text='Confirm', command=latest_run_money)
 set_latest_credits_button.grid(row=3, column=1, pady=10)
 
-# JSON save button
+# Save button
 save_button = ttk.Button(mainframe, text='Save', command=save)
 save_button.grid(row=0, column=3, pady=10, sticky='NWES')
 
-# JSON load button
+# Load button
 load_button = ttk.Button(mainframe, text='Load', command=load)
 load_button.grid(row=0, column=4, pady=10, sticky='NWES')
 
