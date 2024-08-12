@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+selected_moon = ""
+
 totalCredits = {
     'Experimentation': 0,
     'Assurance': 0,
