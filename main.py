@@ -1,7 +1,6 @@
 import tkinter as tk
+import json
 from tkinter import ttk
-
-selected_moon = ""
 
 totalCredits = {
     'Experimentation': 0,
@@ -19,7 +18,9 @@ totalCredits = {
 
 
 def latest_run_money():
-    totalCredits["placeholder"] += 1
+    moon = set_moon_field.get()
+    totalCredits[moon] += 1
+    print(totalCredits)
 
 
 root = tk.Tk()
@@ -30,7 +31,7 @@ mainframe = tk.Frame(root, background='white')
 mainframe.pack(fill='both', expand=True)
 
 # title
-top_text = ttk.Label(mainframe, text='LethalStats', background='white', font=('Arial', 30))
+top_text = ttk.Label(mainframe, text='Experimentation', background='white', font=('Arial', 30))
 top_text.grid(row=0, column=0)
 
 # selector
@@ -41,6 +42,7 @@ set_moon_field.grid(row=1, column=0, sticky='NWES', pady=10)
 
 def set_moon(event):
     selected_moon = set_moon_field.get()
+    print(selected_moon)
     top_text.config(text=selected_moon)
 
 
