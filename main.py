@@ -1,5 +1,7 @@
 import tkinter as tk
+import json
 from tkinter import ttk
+import re
 
 selected_moon = ""
 
@@ -17,9 +19,15 @@ totalCredits = {
     'Embrion': 0
 }
 
-
 def latest_run_money():
-    totalCredits["placeholder"] += 1
+    moon = set_moon_field.get()
+    if moon == '':
+        print('Invalid Moon')
+    else:
+        credits = set_money_field.get()
+        totalCredits[moon] += int(credits)
+        print(totalCredits)
+        set_money_field.delete(0, 'end')
 
 
 root = tk.Tk()
@@ -30,18 +38,19 @@ mainframe = tk.Frame(root, background='white')
 mainframe.pack(fill='both', expand=True)
 
 # title
-top_text = ttk.Label(mainframe, text='LethalStats', background='white', font=('Arial', 30))
+top_text = ttk.Label(mainframe, text='Select Moon', background='white', font=('Arial', 30))
 top_text.grid(row=0, column=0)
 
 # selector
-moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan', 'Artifice', 'Embrion']
+moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan',
+                'Artifice', 'Embrion']
 set_moon_field = ttk.Combobox(mainframe, values=moon_options, state='readonly')
 set_moon_field.grid(row=1, column=0, sticky='NWES', pady=10)
 
 
 def set_moon(event):
     selected_moon = set_moon_field.get()
-    top_text.config(text=selected_moon)
+    print(selected_moon)
 
 
 set_moon_field.bind("<<ComboboxSelected>>", set_moon)
