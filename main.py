@@ -52,12 +52,13 @@ class App():
             titTotal = totalCredits['Titan']
             artTotal = totalCredits['Artifice']
             embTotal = totalCredits['Embrion']
-            selected_moon.get()
-            selected_moon_total_txt_var.set("Total Credits: "+str(expTotal))
+
+            update(set_moon_field.get())
 
         def save():
             with open("./saves/totalCredits.lethalStat", "wb") as outfile:
                 pickle.dump(totalCredits, outfile)
+            update(set_moon_field.get())
 
         def load():
             loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0, 'Adamance': 0,
@@ -89,6 +90,35 @@ class App():
             totalCredits['Artifice'] = art
             totalCredits['Embrion'] = emb
 
+            update(set_moon_field.get())
+
+        def update(moon):
+            print('yeet')
+            if moon == 'Experimentation':
+                moon = totalCredits['Experimentation']
+            elif moon == 'Assurance':
+                moon = totalCredits['Assurance']
+            elif moon == 'Vow':
+                moon = totalCredits['Vow']
+            elif moon == 'Offense':
+                moon = totalCredits['Offense']
+            elif moon == 'March':
+                moon = totalCredits['March']
+            elif moon == 'Adamance':
+                moon = totalCredits['Adamance']
+            elif moon == 'Rend':
+                moon = totalCredits['Rend']
+            elif moon == 'Dine':
+                moon = totalCredits['Dine']
+            elif moon == 'Titan':
+                moon = totalCredits['Titan']
+            elif moon == 'Artifice':
+                moon = totalCredits['Artifice']
+            elif moon == 'Embrion':
+                moon = totalCredits['Embrion']
+
+            selected_moon_total_txt_var.set("Total Credits: " + str(moon))
+
         self.root = tk.Tk()
 
         self.root.geometry('475x500')
@@ -99,6 +129,7 @@ class App():
         top_text = ttk.Label(self.mainframe, text='Select Moon', background='white', font=('Arial', 30))
         top_text.grid(row=0, column=0, padx=10)
 
+        # Moon selection
         moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan',
                         'Artifice', 'Embrion']
         set_moon_field = ttk.Combobox(self.mainframe, values=moon_options, state='readonly')
@@ -107,6 +138,7 @@ class App():
         def set_moon(event):
             selected_moon = set_moon_field.get()
             print(selected_moon)
+            update(set_moon_field.get())
 
         set_moon_field.bind("<<ComboboxSelected>>", set_moon)
 
