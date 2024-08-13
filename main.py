@@ -3,6 +3,22 @@ from tkinter import ttk
 import pickle
 
 
+root = tk.Tk()
+
+
+expTotal = 0
+assTotal = 0
+vowTotal = 0
+offTotal = 0
+marTotal = 0
+adaTotal = 0
+renTotal = 0
+dinTotal = 0
+titTotal = 0
+artTotal = 0
+embTotal = 0
+
+
 def latest_run_money():
     moon = set_moon_field.get()
     if moon == '':
@@ -12,6 +28,17 @@ def latest_run_money():
         totalCredits[moon] += int(credits)
         print(totalCredits)
         set_money_field.delete(0, 'end')
+    expTotal = totalCredits['Experimentation']
+    assTotal = totalCredits['Assurance']
+    vowTotal = totalCredits['Vow']
+    offTotal = totalCredits['Offense']
+    marTotal = totalCredits['March']
+    adaTotal = totalCredits['Adamance']
+    renTotal = totalCredits['Rend']
+    dinTotal = totalCredits['Dine']
+    titTotal = totalCredits['Titan']
+    artTotal = totalCredits['Artifice']
+    embTotal = totalCredits['Embrion']
 
 
 def save():
@@ -64,7 +91,6 @@ totalCredits = {
     'Embrion': 0
 }
 
-root = tk.Tk()
 
 root.geometry('475x500')
 root.title('LethalStats')
@@ -97,12 +123,19 @@ set_money_field.grid(row=3, column=0, pady=10, sticky='NWES')
 set_latest_credits_button = ttk.Button(mainframe, text='Confirm', command=latest_run_money)
 set_latest_credits_button.grid(row=3, column=1, pady=10)
 
+# Total money from selected moon
+spacer_1 = ttk.Label(mainframe, background='white')
+spacer_1.grid(row=4, column=0)
+selected_moon_total = ttk.Label(mainframe, text='Total Money: ' + str(expTotal), background='white', font=('Arial', 10))
+selected_moon_total.grid(row=5, column=0, sticky='W')
+
 # Save button
 save_button = ttk.Button(mainframe, text='Save', command=save)
-save_button.grid(row=0, column=1, pady=10)
+save_button.grid(row=0, column=1, pady=10, sticky='E')
 
 # Load button
 load_button = ttk.Button(mainframe, text='Load', command=load)
-load_button.grid(row=0, column=2, pady=10)
+load_button.grid(row=0, column=2, pady=10, sticky='W')
+
 
 root.mainloop()
