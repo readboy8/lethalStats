@@ -52,6 +52,7 @@ class App():
             titTotal = totalCredits['Titan']
             artTotal = totalCredits['Artifice']
             embTotal = totalCredits['Embrion']
+            selected_moon.get()
             selected_moon_total_txt_var.set("Total Credits: "+str(expTotal))
 
         def save():
@@ -62,6 +63,31 @@ class App():
             loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0, 'Adamance': 0,
                              'Rend': 0,
                              'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
+            with open("./saves/totalCredits.lethalstat", "rb") as openfile:
+                loaded_object = pickle.load(openfile)
+            exp = loaded_object['Experimentation']
+            ass = loaded_object['Assurance']
+            vow = loaded_object['Vow']
+            off = loaded_object['Offense']
+            mar = loaded_object['March']
+            ada = loaded_object['Adamance']
+            ren = loaded_object['Rend']
+            din = loaded_object['Dine']
+            tit = loaded_object['Titan']
+            art = loaded_object['Artifice']
+            emb = loaded_object['Embrion']
+
+            totalCredits['Experimentation'] = exp
+            totalCredits['Assurance'] = ass
+            totalCredits['Vow'] = vow
+            totalCredits['Offense'] = off
+            totalCredits['March'] = mar
+            totalCredits['Adamance'] = ada
+            totalCredits['Rend'] = ren
+            totalCredits['Dine'] = din
+            totalCredits['Titan'] = tit
+            totalCredits['Artifice'] = art
+            totalCredits['Embrion'] = emb
 
         self.root = tk.Tk()
 
