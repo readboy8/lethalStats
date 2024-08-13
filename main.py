@@ -13,7 +13,10 @@ dinTotal = 0
 titTotal = 0
 artTotal = 0
 embTotal = 0
+
 selected_moon = ""
+
+
 totalCredits = {
     'Experimentation': 0,
     'Assurance': 0,
@@ -125,7 +128,7 @@ class App():
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
-
+        
         top_text = ttk.Label(self.mainframe, text='Select Moon', background='white', font=('Arial', 30))
         top_text.grid(row=0, column=0, padx=10)
 
