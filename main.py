@@ -66,14 +66,14 @@ totalCredits = {
 
 root = tk.Tk()
 
-root.geometry('1000x500')
+root.geometry('475x500')
 root.title('LethalStats')
 mainframe = tk.Frame(root, background='white')
 mainframe.pack(fill='both', expand=True)
 
 # title
 top_text = ttk.Label(mainframe, text='Select Moon', background='white', font=('Arial', 30))
-top_text.grid(row=0, column=0)
+top_text.grid(row=0, column=0, padx=10)
 
 # selector
 moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan',
@@ -99,10 +99,10 @@ set_latest_credits_button.grid(row=3, column=1, pady=10)
 
 # Save button
 save_button = ttk.Button(mainframe, text='Save', command=save)
-save_button.grid(row=0, column=3, pady=10, sticky='NWES')
+save_button.grid(row=0, column=1, pady=10)
 
 # Load button
 load_button = ttk.Button(mainframe, text='Load', command=load)
-load_button.grid(row=0, column=4, pady=10, sticky='NWES')
+load_button.grid(row=0, column=2, pady=10)
 
 root.mainloop()
