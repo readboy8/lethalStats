@@ -56,6 +56,20 @@ totalCredits = {
     'Embrion': 0
 }
 
+totalVisits = {
+    'Experimentation': 0,
+    'Assurance': 0,
+    'Vow': 0,
+    'Offense': 0,
+    'March': 0,
+    'Adamance': 0,
+    'Rend': 0,
+    'Dine': 0,
+    'Titan': 0,
+    'Artifice': 0,
+    'Embrion': 0
+}
+
 
 class App():
     def __init__(self):
@@ -127,8 +141,42 @@ class App():
 
                 update(set_moon_field.get(), 'deaths')
 
+            def load3():
+                loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
+                                 'Adamance': 0,
+                                 'Rend': 0,
+                                 'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
+                with open("./saves/totalVisits.lethalstat", "rb") as openfile:
+                    loaded_object = pickle.load(openfile)
+                exp = loaded_object['Experimentation']
+                ass = loaded_object['Assurance']
+                vow = loaded_object['Vow']
+                off = loaded_object['Offense']
+                mar = loaded_object['March']
+                ada = loaded_object['Adamance']
+                ren = loaded_object['Rend']
+                din = loaded_object['Dine']
+                tit = loaded_object['Titan']
+                art = loaded_object['Artifice']
+                emb = loaded_object['Embrion']
+
+                totalVisits['Experimentation'] = exp
+                totalVisits['Assurance'] = ass
+                totalVisits['Vow'] = vow
+                totalVisits['Offense'] = off
+                totalVisits['March'] = mar
+                totalVisits['Adamance'] = ada
+                totalVisits['Rend'] = ren
+                totalVisits['Dine'] = din
+                totalVisits['Titan'] = tit
+                totalVisits['Artifice'] = art
+                totalVisits['Embrion'] = emb
+
+                update(set_moon_field.get(), 'visits')
+
             load1()
             load2()
+            load3()
 
         def latest_run_deaths():
             moon = set_moon_field.get()
@@ -151,7 +199,7 @@ class App():
             artDeaths = totalDeaths['Artifice']
             embDeaths = totalDeaths['Embrion']
 
-            update(set_moon_field.get(), 'death')
+            update(set_moon_field.get(), 'deaths')
 
         def latest_run_money():
             moon = set_moon_field.get()
@@ -181,84 +229,117 @@ class App():
                 pickle.dump(totalCredits, outfile)
             with open("./saves/totalDeaths.lethalStat", "wb") as outfile:
                 pickle.dump(totalDeaths, outfile)
+            with open("./saves/totalVisits.lethalStat", "wb") as outfile:
+                pickle.dump(totalVisits, outfile)
 
         def update(moon, reason):
             cmoon = moon
             if moon == 'Experimentation':
                 if reason == 'money':
                     moon = totalCredits['Experimentation']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Experimentation']
+                elif reason == 'visits':
+                    moon = totalVisits['Experimentation']
                 cmoon = 'Experimentation'
             elif moon == 'Assurance':
                 if reason == 'money':
                     moon = totalCredits['Assurance']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Assurance']
+                elif reason == 'visits':
+                    moon = totalVisits['Assurance']
                 cmoon = 'Assurance'
             elif moon == 'Vow':
                 if reason == 'money':
                     moon = totalCredits['Vow']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Vow']
+                elif reason == 'visits':
+                    moon = totalVisits['Vow']
                 cmoon = 'Vow'
             elif moon == 'Offense':
                 if reason == 'money':
                     moon = totalCredits['Offense']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Offense']
+                elif reason == 'visits':
+                    moon = totalVisits['Offense']
                 cmoon = 'Offense'
             elif moon == 'March':
                 if reason == 'money':
                     moon = totalCredits['March']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['March']
+                elif reason == 'visits':
+                    moon = totalVisits['March']
                 cmoon = 'March'
             elif moon == 'Adamance':
                 if reason == 'money':
                     moon = totalCredits['Adamance']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Adamance']
+                elif reason == 'visits':
+                    moon = totalVisits['Adamance']
                 cmoon = 'Adamance'
             elif moon == 'Rend':
                 if reason == 'money':
                     moon = totalCredits['Rend']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Rend']
+                elif reason == 'visits':
+                    moon = totalVisits['Rend']
                 cmoon = 'Rend'
             elif moon == 'Dine':
                 if reason == 'money':
                     moon = totalCredits['Dine']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Dine']
+                elif reason == 'visits':
+                    moon = totalVisits['Dine']
                 cmoon = 'Dine'
             elif moon == 'Titan':
                 if reason == 'money':
                     moon = totalCredits['Titan']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Titan']
+                elif reason == 'visits':
+                    moon = totalVisits['Titan']
                 cmoon = 'Titan'
             elif moon == 'Artifice':
                 if reason == 'money':
                     moon = totalCredits['Artifice']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Artifice']
+                elif reason == 'visits':
+                    moon = totalVisits['Artifice']
                 cmoon = 'Artifice'
             elif moon == 'Embrion':
                 if reason == 'money':
                     moon = totalCredits['Embrion']
-                else:
+                elif reason == 'deaths':
                     moon = totalDeaths['Embrion']
+                elif reason == 'visits':
+                    moon = totalVisits['Embrion']
                 cmoon = 'Embrion'
 
             if reason == 'money':
                 selected_moon_total_txt_var.set("Total Credits: " + str(moon))
-            else:
+            elif reason == 'deaths':
                 selected_moon_total_deaths_txt_var.set("Total Deaths: " + str(moon))
-
-            # selected_moon_total_txt_var.set("Total Credits: " + str(moon))
+            elif reason == 'visits':
+                total_attempts_text_var.set("Total Attempts: " + str(moon))
 
             current_moon_text_var.set(cmoon)
+
+        def plus_attempt():
+            moon = set_moon_field.get()
+            if moon == '':
+                print("Invalid Moon")
+            else:
+                totalVisits[moon] += 1
+                print(totalVisits)
+                total_attempts_text_var.set("Total Attempts: " + str(totalVisits[moon]))
 
         self.root = tk.Tk()
 
@@ -266,6 +347,14 @@ class App():
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
+
+        # Save button
+        save_button = ttk.Button(self.mainframe, text='Save', command=save)
+        save_button.grid(row=0, column=3, pady=10, sticky='E')
+
+        # Load button
+        load_button = ttk.Button(self.mainframe, text='Load', command=load)
+        load_button.grid(row=0, column=4, pady=10, sticky='W')
 
         top_text = ttk.Label(self.mainframe, text='Select Moon', background='white', font=('Arial', 18))
         top_text.grid(row=0, column=0, sticky='W')
@@ -280,7 +369,8 @@ class App():
             selected_moon = set_moon_field.get()
             print(selected_moon)
             update(set_moon_field.get(), 'money')
-            update(set_moon_field.get(), 'no reason')
+            update(set_moon_field.get(), 'deaths')
+            update(set_moon_field.get(), 'visits')
 
         set_moon_field.bind("<<ComboboxSelected>>", set_moon)
 
@@ -302,7 +392,7 @@ class App():
 
         # Total money from selected moon
         selected_moon_total_txt_var = tk.StringVar()
-        selected_moon_total_txt_var.set("Total Credits: 0")
+        selected_moon_total_txt_var.set("Total Credits: ")
         spacer_1 = ttk.Label(self.mainframe, background='white')
         spacer_1.grid(row=5, column=0)
         selected_moon_total = ttk.Label(self.mainframe, textvariable=selected_moon_total_txt_var, background='white',
@@ -311,7 +401,7 @@ class App():
 
         # Total deaths from selected moon
         selected_moon_total_deaths_txt_var = tk.StringVar()
-        selected_moon_total_deaths_txt_var.set("Total Deaths: 0")
+        selected_moon_total_deaths_txt_var.set("Total Deaths: ")
         selected_moon_total_deaths = ttk.Label(self.mainframe, textvariable=selected_moon_total_deaths_txt_var,
                                                background='white',
                                                font=('Arial', 10))
@@ -319,18 +409,26 @@ class App():
 
         # current moon text
         current_moon_text_var = tk.StringVar()
-        current_moon_text_var.set("Select Moon")
+        current_moon_text_var.set("")
         current_moon_text = ttk.Label(self.mainframe, textvariable=current_moon_text_var, background='white',
                                       font=('Arial', 18))
         current_moon_text.grid(row=6, column=0, sticky='W')
 
-        # Save button
-        save_button = ttk.Button(self.mainframe, text='Save', command=save)
-        save_button.grid(row=0, column=3, pady=10, sticky='E')
+        # average money
+        spacer_2 = ttk.Label(self.mainframe, background='white')
+        spacer_2.grid(row=10, column=0)
+        average_money_text_Var = tk.StringVar()
+        average_money_text_Var.set("Average Credits: ")
+        average_money_text = ttk.Label(self.mainframe, textvariable=average_money_text_Var, background='white')
+        average_money_text.grid(row=11, column=0, sticky='W')
 
-        # Load button
-        load_button = ttk.Button(self.mainframe, text='Load', command=load)
-        load_button.grid(row=0, column=4, pady=10, sticky='W')
+        # plus one attempt button
+        total_attempts_text_var = tk.StringVar()
+        total_attempts_text_var.set('Total Attempts: ')
+        plus_attempt = ttk.Button(self.mainframe, text='+1 Attempt', command=plus_attempt)
+        plus_attempt.grid(row=4, column=4)
+        total_attempts = ttk.Label(self.mainframe, textvariable=total_attempts_text_var, background='white')
+        total_attempts.grid(row=9, column=0, sticky='W')
 
         self.root.mainloop()
         return
