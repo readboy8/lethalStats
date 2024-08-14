@@ -60,6 +60,76 @@ totalCredits = {
 class App():
     def __init__(self):
 
+        def load():
+            def load1():
+                loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
+                                 'Adamance': 0,
+                                 'Rend': 0,
+                                 'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
+                with open("./saves/totalCredits.lethalstat", "rb") as openfile:
+                    loaded_object = pickle.load(openfile)
+                exp = loaded_object['Experimentation']
+                ass = loaded_object['Assurance']
+                vow = loaded_object['Vow']
+                off = loaded_object['Offense']
+                mar = loaded_object['March']
+                ada = loaded_object['Adamance']
+                ren = loaded_object['Rend']
+                din = loaded_object['Dine']
+                tit = loaded_object['Titan']
+                art = loaded_object['Artifice']
+                emb = loaded_object['Embrion']
+
+                totalCredits['Experimentation'] = exp
+                totalCredits['Assurance'] = ass
+                totalCredits['Vow'] = vow
+                totalCredits['Offense'] = off
+                totalCredits['March'] = mar
+                totalCredits['Adamance'] = ada
+                totalCredits['Rend'] = ren
+                totalCredits['Dine'] = din
+                totalCredits['Titan'] = tit
+                totalCredits['Artifice'] = art
+                totalCredits['Embrion'] = emb
+
+                update(set_moon_field.get(), 'no reason')
+
+            def load2():
+                loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
+                                 'Adamance': 0,
+                                 'Rend': 0,
+                                 'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
+                with open("./saves/totalDeaths.lethalstat", "rb") as openfile:
+                    loaded_object = pickle.load(openfile)
+                exp = loaded_object['Experimentation']
+                ass = loaded_object['Assurance']
+                vow = loaded_object['Vow']
+                off = loaded_object['Offense']
+                mar = loaded_object['March']
+                ada = loaded_object['Adamance']
+                ren = loaded_object['Rend']
+                din = loaded_object['Dine']
+                tit = loaded_object['Titan']
+                art = loaded_object['Artifice']
+                emb = loaded_object['Embrion']
+
+                totalDeaths['Experimentation'] = exp
+                totalDeaths['Assurance'] = ass
+                totalDeaths['Vow'] = vow
+                totalDeaths['Offense'] = off
+                totalDeaths['March'] = mar
+                totalDeaths['Adamance'] = ada
+                totalDeaths['Rend'] = ren
+                totalDeaths['Dine'] = din
+                totalDeaths['Titan'] = tit
+                totalDeaths['Artifice'] = art
+                totalDeaths['Embrion'] = emb
+
+                update(set_moon_field.get(), 'no reason')
+
+            load1()
+            load2()
+
         def latest_run_deaths():
             moon = set_moon_field.get()
             if moon == '':
@@ -114,67 +184,7 @@ class App():
                 pickle.dump(totalDeaths, outfile)
                 print('bababooey')
 
-        def load():
-            loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0, 'Adamance': 0,
-                             'Rend': 0,
-                             'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
-            with open("./saves/totalCredits.lethalstat", "rb") as openfile:
-                loaded_object = pickle.load(openfile)
-            exp = loaded_object['Experimentation']
-            ass = loaded_object['Assurance']
-            vow = loaded_object['Vow']
-            off = loaded_object['Offense']
-            mar = loaded_object['March']
-            ada = loaded_object['Adamance']
-            ren = loaded_object['Rend']
-            din = loaded_object['Dine']
-            tit = loaded_object['Titan']
-            art = loaded_object['Artifice']
-            emb = loaded_object['Embrion']
 
-            totalCredits['Experimentation'] = exp
-            totalCredits['Assurance'] = ass
-            totalCredits['Vow'] = vow
-            totalCredits['Offense'] = off
-            totalCredits['March'] = mar
-            totalCredits['Adamance'] = ada
-            totalCredits['Rend'] = ren
-            totalCredits['Dine'] = din
-            totalCredits['Titan'] = tit
-            totalCredits['Artifice'] = art
-            totalCredits['Embrion'] = emb
-
-            loaded_deaths_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
-                                    'Adamance': 0,
-                                    'Rend': 0,
-                                    'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
-            with open("./saves/totalDeaths.lethalStat", "rb") as outfile:
-                loaded_deaths_object = pickle.load(openfile)
-            exp = loaded_deaths_object['Experimentation']
-            ass = loaded_deaths_object['Assurance']
-            vow = loaded_deaths_object['Vow']
-            off = loaded_deaths_object['Offense']
-            mar = loaded_deaths_object['March']
-            ada = loaded_deaths_object['Adamance']
-            ren = loaded_deaths_object['Rend']
-            din = loaded_deaths_object['Dine']
-            tit = loaded_deaths_object['Titan']
-            art = loaded_deaths_object['Artifice']
-            emb = loaded_deaths_object['Embrion']
-
-            totalDeaths['Experimentation'] = exp
-            totalDeaths['Assurance'] = ass
-            totalDeaths['Vow'] = vow
-            totalDeaths['Offense'] = off
-            totalDeaths['March'] = mar
-            totalDeaths['Adamance'] = ada
-            totalDeaths['Rend'] = ren
-            totalDeaths['Dine'] = din
-            totalDeaths['Titan'] = tit
-            totalDeaths['Artifice'] = art
-            totalDeaths['Embrion'] = emb
-
-            update(set_moon_field.get(), 'no reason')
 
         def update(moon, reason):
             cmoon = moon
