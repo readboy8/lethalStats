@@ -200,6 +200,8 @@ class App():
             embDeaths = totalDeaths['Embrion']
 
             update(set_moon_field.get(), 'deaths')
+            average_deaths()
+            average_credit()
 
         def latest_run_money():
             moon = set_moon_field.get()
@@ -223,6 +225,8 @@ class App():
             embTotal = totalCredits['Embrion']
 
             update(set_moon_field.get(), 'money')
+            average_deaths()
+            average_credit()
 
         def save():
             with open("./saves/totalCredits.lethalStat", "wb") as outfile:
@@ -340,6 +344,8 @@ class App():
                 totalVisits[moon] += 1
                 print(totalVisits)
                 total_attempts_text_var.set("Total Attempts: " + str(totalVisits[moon]))
+                average_deaths()
+                average_credit()
 
         self.root = tk.Tk()
 
@@ -371,6 +377,10 @@ class App():
             update(set_moon_field.get(), 'money')
             update(set_moon_field.get(), 'deaths')
             update(set_moon_field.get(), 'visits')
+            average_credits_text_var.set("Average Credits: 0")
+            average_deaths_text_var.set("Average Deaths: 0")
+            average_deaths()
+            average_credit()
 
         set_moon_field.bind("<<ComboboxSelected>>", set_moon)
 
@@ -414,14 +424,6 @@ class App():
                                       font=('Arial', 18))
         current_moon_text.grid(row=6, column=0, sticky='W')
 
-        # average money
-        spacer_2 = ttk.Label(self.mainframe, background='white')
-        spacer_2.grid(row=10, column=0)
-        average_money_text_Var = tk.StringVar()
-        average_money_text_Var.set("Average Credits: ")
-        average_money_text = ttk.Label(self.mainframe, textvariable=average_money_text_Var, background='white')
-        average_money_text.grid(row=11, column=0, sticky='W')
-
         # plus one attempt button
         total_attempts_text_var = tk.StringVar()
         total_attempts_text_var.set('Total Attempts: ')
@@ -429,6 +431,32 @@ class App():
         plus_attempt.grid(row=4, column=4)
         total_attempts = ttk.Label(self.mainframe, textvariable=total_attempts_text_var, background='white')
         total_attempts.grid(row=9, column=0, sticky='W')
+
+        # Average deaths
+        def average_deaths():
+            moon = set_moon_field.get()
+            average_death = totalDeaths[moon] / totalVisits[moon]
+            average_death = round(average_death, 0)
+            average_deaths_text_var.set("Average Deaths: " + str(average_death))
+            print(average_death)
+
+        average_deaths_text_var = tk.StringVar()
+        average_deaths_text_var.set("Average Deaths: ")
+        average_deaths_label = ttk.Label(self.mainframe, textvariable=average_deaths_text_var, background='white')
+        average_deaths_label.grid(row=8, column=2, sticky='W')
+
+        # Average credit
+        def average_credit():
+            moon = set_moon_field.get()
+            average_credits = totalCredits[moon] / totalVisits[moon]
+            average_credits = round(average_credits, 0)
+            average_credits_text_var.set("Average Credits: " + str(average_credits))
+            print(average_credits)
+
+        average_credits_text_var = tk.StringVar()
+        average_credits_text_var.set("Average Credits: ")
+        average_credits_label = ttk.Label(self.mainframe, textvariable=average_credits_text_var, background='white')
+        average_credits_label.grid(row=7, column=2, sticky='W')
 
         self.root.mainloop()
         return
