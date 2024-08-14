@@ -26,7 +26,6 @@ titDeaths = 0
 artDeaths = 0
 embDeaths = 0
 
-
 selected_moon = ""
 
 totalDeaths = {
@@ -110,7 +109,10 @@ class App():
         def save():
             with open("./saves/totalCredits.lethalStat", "wb") as outfile:
                 pickle.dump(totalCredits, outfile)
-            update(set_moon_field.get())
+            print('bababooey')
+            with open("./saves/totalDeaths.lethalStat", "wb") as outfile:
+                pickle.dump(totalDeaths, outfile)
+                print('bababooey')
 
         def load():
             loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0, 'Adamance': 0,
@@ -142,7 +144,37 @@ class App():
             totalCredits['Artifice'] = art
             totalCredits['Embrion'] = emb
 
-            update(set_moon_field.get())
+            loaded_deaths_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
+                                    'Adamance': 0,
+                                    'Rend': 0,
+                                    'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
+            with open("./saves/totalDeaths.lethalStat", "rb") as outfile:
+                loaded_deaths_object = pickle.load(openfile)
+            exp = loaded_deaths_object['Experimentation']
+            ass = loaded_deaths_object['Assurance']
+            vow = loaded_deaths_object['Vow']
+            off = loaded_deaths_object['Offense']
+            mar = loaded_deaths_object['March']
+            ada = loaded_deaths_object['Adamance']
+            ren = loaded_deaths_object['Rend']
+            din = loaded_deaths_object['Dine']
+            tit = loaded_deaths_object['Titan']
+            art = loaded_deaths_object['Artifice']
+            emb = loaded_deaths_object['Embrion']
+
+            totalDeaths['Experimentation'] = exp
+            totalDeaths['Assurance'] = ass
+            totalDeaths['Vow'] = vow
+            totalDeaths['Offense'] = off
+            totalDeaths['March'] = mar
+            totalDeaths['Adamance'] = ada
+            totalDeaths['Rend'] = ren
+            totalDeaths['Dine'] = din
+            totalDeaths['Titan'] = tit
+            totalDeaths['Artifice'] = art
+            totalDeaths['Embrion'] = emb
+
+            update(set_moon_field.get(), 'no reason')
 
         def update(moon, reason):
             cmoon = moon
@@ -176,26 +208,46 @@ class App():
                 else:
                     moon = totalDeaths['March']
                 cmoon = 'March'
-            elif moon == 'Adamance':  #Still need to finish adding the if statements to all the if statements below this comment
-                moon = totalCredits['Adamance']
+            elif moon == 'Adamance':
+                if reason == 'money':
+                    moon = totalCredits['Adamance']
+                else:
+                    moon = totalDeaths['Adamance']
                 cmoon = 'Adamance'
             elif moon == 'Rend':
-                moon = totalCredits['Rend']
+                if reason == 'money':
+                    moon = totalCredits['Rend']
+                else:
+                    moon == totalDeaths['Rend']
                 cmoon = 'Rend'
             elif moon == 'Dine':
-                moon = totalCredits['Dine']
+                if reason == 'money':
+                    moon = totalCredits['Dine']
+                else:
+                    moon = totalDeaths['Dine']
                 cmoon = 'Dine'
             elif moon == 'Titan':
-                moon = totalCredits['Titan']
+                if reason == 'money':
+                    moon = totalCredits['Titan']
+                else:
+                    moon = totalDeaths['Titan']
                 cmoon = 'Titan'
             elif moon == 'Artifice':
-                moon = totalCredits['Artifice']
+                if reason == 'money':
+                    moon = totalCredits['Artifice']
+                else:
+                    moon = totalDeaths['Artifice']
                 cmoon = 'Artifice'
             elif moon == 'Embrion':
-                moon = totalCredits['Embrion']
+                if reason == 'money':
+                    moon = totalCredits['Embrion']
+                else:
+                    moon = totalDeaths['Embrion']
                 cmoon = 'Embrion'
-
-            selected_moon_total_txt_var.set("Total Credits: " + str(moon))
+            if reason == 'money':
+                selected_moon_total_txt_var.set("Total Credits: " + str(moon))
+            else:
+                selected_moon_total_deaths_txt_var.set("Total Deaths: " + str(moon))
             current_moon_text_var.set(cmoon)
 
         self.root = tk.Tk()
@@ -204,7 +256,7 @@ class App():
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
-        
+
         top_text = ttk.Label(self.mainframe, text='Select Moon', background='white', font=('Arial', 18))
         top_text.grid(row=0, column=0, sticky='W')
 
@@ -217,7 +269,7 @@ class App():
         def set_moon(event):
             selected_moon = set_moon_field.get()
             print(selected_moon)
-            update(set_moon_field.get())
+            update(set_moon_field.get(), 'null')
 
         set_moon_field.bind("<<ComboboxSelected>>", set_moon)
 
@@ -249,14 +301,16 @@ class App():
         # Total deaths from selected moon
         selected_moon_total_deaths_txt_var = tk.StringVar()
         selected_moon_total_deaths_txt_var.set("Total Deaths: 0")
-        selected_moon_total_deaths = ttk.Label(self.mainframe, textvariable=selected_moon_total_deaths_txt_var, background='white',
-                                        font=('Arial', 10))
+        selected_moon_total_deaths = ttk.Label(self.mainframe, textvariable=selected_moon_total_deaths_txt_var,
+                                               background='white',
+                                               font=('Arial', 10))
         selected_moon_total_deaths.grid(row=8, column=0, sticky='W')
 
         # current moon text
         current_moon_text_var = tk.StringVar()
         current_moon_text_var.set("Select Moon")
-        current_moon_text = ttk.Label(self.mainframe, textvariable=current_moon_text_var, background='white', font=('Arial',18))
+        current_moon_text = ttk.Label(self.mainframe, textvariable=current_moon_text_var, background='white',
+                                      font=('Arial', 18))
         current_moon_text.grid(row=6, column=0, sticky='W')
 
         # Save button
