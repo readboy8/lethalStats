@@ -92,7 +92,7 @@ class App():
                 totalCredits['Artifice'] = art
                 totalCredits['Embrion'] = emb
 
-                update(set_moon_field.get(), 'no reason')
+                update(set_moon_field.get(), 'money')
 
             def load2():
                 loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
@@ -125,7 +125,7 @@ class App():
                 totalDeaths['Artifice'] = art
                 totalDeaths['Embrion'] = emb
 
-                update(set_moon_field.get(), 'no reason')
+                update(set_moon_field.get(), 'deaths')
 
             load1()
             load2()
@@ -179,12 +179,8 @@ class App():
         def save():
             with open("./saves/totalCredits.lethalStat", "wb") as outfile:
                 pickle.dump(totalCredits, outfile)
-            print('bababooey')
             with open("./saves/totalDeaths.lethalStat", "wb") as outfile:
                 pickle.dump(totalDeaths, outfile)
-                print('bababooey')
-
-
 
         def update(moon, reason):
             cmoon = moon
@@ -228,7 +224,7 @@ class App():
                 if reason == 'money':
                     moon = totalCredits['Rend']
                 else:
-                    moon == totalDeaths['Rend']
+                    moon = totalDeaths['Rend']
                 cmoon = 'Rend'
             elif moon == 'Dine':
                 if reason == 'money':
@@ -254,15 +250,19 @@ class App():
                 else:
                     moon = totalDeaths['Embrion']
                 cmoon = 'Embrion'
+
             if reason == 'money':
                 selected_moon_total_txt_var.set("Total Credits: " + str(moon))
             else:
                 selected_moon_total_deaths_txt_var.set("Total Deaths: " + str(moon))
+
+            # selected_moon_total_txt_var.set("Total Credits: " + str(moon))
+
             current_moon_text_var.set(cmoon)
 
         self.root = tk.Tk()
 
-        self.root.geometry('508x500')
+        self.root.geometry('535x500')
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
@@ -279,7 +279,8 @@ class App():
         def set_moon(event):
             selected_moon = set_moon_field.get()
             print(selected_moon)
-            update(set_moon_field.get(), 'null')
+            update(set_moon_field.get(), 'money')
+            update(set_moon_field.get(), 'no reason')
 
         set_moon_field.bind("<<ComboboxSelected>>", set_moon)
 
