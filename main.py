@@ -348,8 +348,9 @@ class App():
                 average_credit()
 
         self.root = tk.Tk()
-
-        self.root.geometry('535x500')
+        self.root.resizable(False, False)
+        self.root.geometry('550x250')
+        self.root.iconbitmap('lethalstatslogo.ico')
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
