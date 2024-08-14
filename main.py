@@ -14,8 +14,34 @@ titTotal = 0
 artTotal = 0
 embTotal = 0
 
+expDeaths = 0
+assDeaths = 0
+vowDeaths = 0
+offDeaths = 0
+marDeaths = 0
+adaDeaths = 0
+renDeaths = 0
+dinDeaths = 0
+titDeaths = 0
+artDeaths = 0
+embDeaths = 0
+
+
 selected_moon = ""
 
+totalDeaths = {
+    'Experimentation': 0,
+    'Assurance': 0,
+    'Vow': 0,
+    'Offense': 0,
+    'March': 0,
+    'Adamance': 0,
+    'Rend': 0,
+    'Dine': 0,
+    'Titan': 0,
+    'Artifice': 0,
+    'Embrion': 0
+}
 
 totalCredits = {
     'Experimentation': 0,
@@ -40,23 +66,23 @@ class App():
             if moon == '':
                 print('Invalid Moon')
             else:
-                credits = set_money_field.get()
-                totalCredits[moon] += int(credits)
-                print(totalCredits)
-                set_money_field.delete(0, 'end')
-            expTotal = totalCredits['Experimentation']
-            assTotal = totalCredits['Assurance']
-            vowTotal = totalCredits['Vow']
-            offTotal = totalCredits['Offense']
-            marTotal = totalCredits['March']
-            adaTotal = totalCredits['Adamance']
-            renTotal = totalCredits['Rend']
-            dinTotal = totalCredits['Dine']
-            titTotal = totalCredits['Titan']
-            artTotal = totalCredits['Artifice']
-            embTotal = totalCredits['Embrion']
+                deaths = set_deaths_field.get()
+                totalDeaths[moon] += int(deaths)
+                print(totalDeaths)
+                set_deaths_field.delete(0, 'end')
+            expDeaths = totalDeaths['Experimentation']
+            assDeaths = totalDeaths['Assurance']
+            vowDeaths = totalDeaths['Vow']
+            offDeaths = totalDeaths['Offense']
+            marDeaths = totalDeaths['March']
+            adaDeaths = totalDeaths['Adamance']
+            renDeaths = totalDeaths['Rend']
+            dinDeaths = totalDeaths['Dine']
+            titDeaths = totalDeaths['Titan']
+            artDeaths = totalDeaths['Artifice']
+            embDeaths = totalDeaths['Embrion']
 
-            update(set_moon_field.get())
+            update(set_moon_field.get(), 'death')
 
         def latest_run_money():
             moon = set_moon_field.get()
@@ -79,7 +105,7 @@ class App():
             artTotal = totalCredits['Artifice']
             embTotal = totalCredits['Embrion']
 
-            update(set_moon_field.get())
+            update(set_moon_field.get(), 'money')
 
         def save():
             with open("./saves/totalCredits.lethalStat", "wb") as outfile:
@@ -118,24 +144,39 @@ class App():
 
             update(set_moon_field.get())
 
-        def update(moon):
+        def update(moon, reason):
             cmoon = moon
             if moon == 'Experimentation':
-                moon = totalCredits['Experimentation']
+                if reason == 'money':
+                    moon = totalCredits['Experimentation']
+                else:
+                    moon = totalDeaths['Experimentation']
                 cmoon = 'Experimentation'
             elif moon == 'Assurance':
-                moon = totalCredits['Assurance']
+                if reason == 'money':
+                    moon = totalCredits['Assurance']
+                else:
+                    moon = totalDeaths['Assurance']
                 cmoon = 'Assurance'
             elif moon == 'Vow':
-                moon = totalCredits['Vow']
+                if reason == 'money':
+                    moon = totalCredits['Vow']
+                else:
+                    moon = totalDeaths['Vow']
                 cmoon = 'Vow'
             elif moon == 'Offense':
-                moon = totalCredits['Offense']
+                if reason == 'money':
+                    moon = totalCredits['Offense']
+                else:
+                    moon = totalDeaths['Offense']
                 cmoon = 'Offense'
             elif moon == 'March':
-                moon = totalCredits['March']
+                if reason == 'money':
+                    moon = totalCredits['March']
+                else:
+                    moon = totalDeaths['March']
                 cmoon = 'March'
-            elif moon == 'Adamance':
+            elif moon == 'Adamance':  #Still need to finish adding the if statements to all the if statements below this comment
                 moon = totalCredits['Adamance']
                 cmoon = 'Adamance'
             elif moon == 'Rend':
@@ -204,6 +245,13 @@ class App():
         selected_moon_total = ttk.Label(self.mainframe, textvariable=selected_moon_total_txt_var, background='white',
                                         font=('Arial', 10))
         selected_moon_total.grid(row=7, column=0, sticky='W')
+
+        # Total deaths from selected moon
+        selected_moon_total_deaths_txt_var = tk.StringVar()
+        selected_moon_total_deaths_txt_var.set("Total Deaths: 0")
+        selected_moon_total_deaths = ttk.Label(self.mainframe, textvariable=selected_moon_total_deaths_txt_var, background='white',
+                                        font=('Arial', 10))
+        selected_moon_total_deaths.grid(row=8, column=0, sticky='W')
 
         # current moon text
         current_moon_text_var = tk.StringVar()
