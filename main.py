@@ -71,15 +71,11 @@ totalVisits = {
 }
 
 
-class App():
+class App:
     def __init__(self):
 
         def load():
             def load1():
-                loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
-                                 'Adamance': 0,
-                                 'Rend': 0,
-                                 'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
                 with open("./saves/totalCredits.lethalstat", "rb") as openfile:
                     loaded_object = pickle.load(openfile)
                 exp = loaded_object['Experimentation']
@@ -109,10 +105,6 @@ class App():
                 update(set_moon_field.get(), 'money')
 
             def load2():
-                loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
-                                 'Adamance': 0,
-                                 'Rend': 0,
-                                 'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
                 with open("./saves/totalDeaths.lethalstat", "rb") as openfile:
                     loaded_object = pickle.load(openfile)
                 exp = loaded_object['Experimentation']
@@ -142,10 +134,6 @@ class App():
                 update(set_moon_field.get(), 'deaths')
 
             def load3():
-                loaded_object = {'Experimentation': 0, 'Assurance': 0, 'Vow': 0, 'Offense': 0, 'March': 0,
-                                 'Adamance': 0,
-                                 'Rend': 0,
-                                 'Dine': 0, 'Titan': 0, 'Artifice': 0, 'Embrion': 0}
                 with open("./saves/totalVisits.lethalstat", "rb") as openfile:
                     loaded_object = pickle.load(openfile)
                 exp = loaded_object['Experimentation']
@@ -187,17 +175,6 @@ class App():
                 totalDeaths[moon] += int(deaths)
                 print(totalDeaths)
                 set_deaths_field.delete(0, 'end')
-            expDeaths = totalDeaths['Experimentation']
-            assDeaths = totalDeaths['Assurance']
-            vowDeaths = totalDeaths['Vow']
-            offDeaths = totalDeaths['Offense']
-            marDeaths = totalDeaths['March']
-            adaDeaths = totalDeaths['Adamance']
-            renDeaths = totalDeaths['Rend']
-            dinDeaths = totalDeaths['Dine']
-            titDeaths = totalDeaths['Titan']
-            artDeaths = totalDeaths['Artifice']
-            embDeaths = totalDeaths['Embrion']
 
             update(set_moon_field.get(), 'deaths')
             average_deaths()
@@ -212,17 +189,6 @@ class App():
                 totalCredits[moon] += int(credits)
                 print(totalCredits)
                 set_money_field.delete(0, 'end')
-            expTotal = totalCredits['Experimentation']
-            assTotal = totalCredits['Assurance']
-            vowTotal = totalCredits['Vow']
-            offTotal = totalCredits['Offense']
-            marTotal = totalCredits['March']
-            adaTotal = totalCredits['Adamance']
-            renTotal = totalCredits['Rend']
-            dinTotal = totalCredits['Dine']
-            titTotal = totalCredits['Titan']
-            artTotal = totalCredits['Artifice']
-            embTotal = totalCredits['Embrion']
 
             update(set_moon_field.get(), 'money')
             average_deaths()
