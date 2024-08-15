@@ -337,7 +337,7 @@ class App:
         # Moon selection
         moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan',
                         'Artifice', 'Embrion']
-        set_moon_field = ttk.Combobox(self.mainframe, values=moon_options, state='readonly')
+        set_moon_field = ttk.Combobox(self.mainframe, values=moon_options, state='readonly', width=29)
         set_moon_field.grid(row=1, column=0, sticky='W', pady=10)
 
         def set_moon(event):
@@ -346,6 +346,8 @@ class App:
             update(set_moon_field.get(), 'money')
             update(set_moon_field.get(), 'deaths')
             update(set_moon_field.get(), 'visits')
+            set_deaths_field.delete(0, 'end')
+            set_money_field.delete(0, 'end')
             average_credits_text_var.set("Average Credits: 0")
             average_deaths_text_var.set("Average Deaths: 0")
             average_deaths()
@@ -359,15 +361,15 @@ class App:
         set_money_field = ttk.Entry(self.mainframe)
         set_money_field.grid(row=4, column=0, sticky='WE')
         set_latest_credits_button = ttk.Button(self.mainframe, text='Confirm', command=latest_run_money)
-        set_latest_credits_button.grid(row=4, column=1, sticky='W')
+        set_latest_credits_button.grid(row=4, column=1, sticky='WE')
 
         # Input deaths from last run
         deaths_input_text = ttk.Label(self.mainframe, text='Deaths On Last Run', background='white', font=('Arial', 10))
         deaths_input_text.grid(row=3, column=2, sticky='W')
         set_deaths_field = ttk.Entry(self.mainframe)
-        set_deaths_field.grid(row=4, column=2, sticky='W')
+        set_deaths_field.grid(row=4, column=2, sticky='WE')
         set_latest_credits_button = ttk.Button(self.mainframe, text='Confirm', command=latest_run_deaths)
-        set_latest_credits_button.grid(row=4, column=3, sticky='W')
+        set_latest_credits_button.grid(row=4, column=3, sticky='WE')
 
         # Total money from selected moon
         selected_moon_total_txt_var = tk.StringVar()
