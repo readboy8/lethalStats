@@ -165,6 +165,8 @@ class App:
             load1()
             load2()
             load3()
+            average_deaths()
+            average_credit()
 
         def latest_run_deaths():
             moon = set_moon_field.get()
