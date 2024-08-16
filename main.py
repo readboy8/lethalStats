@@ -317,27 +317,35 @@ class App:
 
         self.root = tk.Tk()
         self.root.resizable(False, False)
-        self.root.geometry('550x250')
+        self.root.geometry('481x250')
         self.root.iconbitmap('lethalstatslogo.ico')
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
 
+        # >>>Topframe >>>
+        self.topframe = tk.Frame(self.mainframe, background='white')
+        self.topframe.grid(row=0, column=0)
+
+        # spacer
+        spacer_2 = ttk.Label(self.topframe, background='white', text='                                          ')
+        spacer_2.grid(row=0, column=2)
+
         # Save button
-        save_button = ttk.Button(self.mainframe, text='Save', command=save)
+        save_button = ttk.Button(self.topframe, text='Save', command=save)
         save_button.grid(row=0, column=3, pady=10, sticky='E')
 
         # Load button
-        load_button = ttk.Button(self.mainframe, text='Load', command=load)
+        load_button = ttk.Button(self.topframe, text='Load', command=load)
         load_button.grid(row=0, column=4, pady=10, sticky='W')
 
-        top_text = ttk.Label(self.mainframe, text='Select Moon', background='white', font=('Arial', 18))
+        top_text = ttk.Label(self.topframe, text='Select Moon', background='white', font=('Arial', 18))
         top_text.grid(row=0, column=0, sticky='W')
 
         # Moon selection
         moon_options = ['Experimentation', 'Assurance', 'Vow', 'Offense', 'March', 'Adamance', 'Rend', 'Dine', 'Titan',
                         'Artifice', 'Embrion']
-        set_moon_field = ttk.Combobox(self.mainframe, values=moon_options, state='readonly', width=29)
+        set_moon_field = ttk.Combobox(self.topframe, values=moon_options, state='readonly', width=29)
         set_moon_field.grid(row=1, column=0, sticky='W', pady=10)
 
         def set_moon(event):
@@ -354,54 +362,68 @@ class App:
             average_credit()
 
         set_moon_field.bind("<<ComboboxSelected>>", set_moon)
+        # <<<Topframe<<<
+
+        # >>>midframe>>>
+        self.midframe = tk.Frame(self.mainframe, background='white')
+        self.midframe.grid(row=1, column=0, sticky='W')
 
         # Input money from last run
-        money_input_text = ttk.Label(self.mainframe, text='Credits On Last Run', background='white', font=('Arial', 10))
-        money_input_text.grid(row=3, column=0, sticky='W')
-        set_money_field = ttk.Entry(self.mainframe)
-        set_money_field.grid(row=4, column=0, sticky='WE')
-        set_latest_credits_button = ttk.Button(self.mainframe, text='Confirm', command=latest_run_money)
-        set_latest_credits_button.grid(row=4, column=1, sticky='WE')
+        money_input_text = ttk.Label(self.midframe, text='Credits On Last Run', background='white', font=('Arial', 10))
+        money_input_text.grid(row=1, column=0, sticky='W')
+        set_money_field = ttk.Entry(self.midframe, width=20)
+        set_money_field.grid(row=2, column=0, sticky='W')
+        set_latest_credits_button = ttk.Button(self.midframe, text='Confirm', command=latest_run_money)
+        set_latest_credits_button.grid(row=2, column=1, sticky='W')
 
         # Input deaths from last run
-        deaths_input_text = ttk.Label(self.mainframe, text='Deaths On Last Run', background='white', font=('Arial', 10))
-        deaths_input_text.grid(row=3, column=2, sticky='W')
-        set_deaths_field = ttk.Entry(self.mainframe)
-        set_deaths_field.grid(row=4, column=2, sticky='WE')
-        set_latest_credits_button = ttk.Button(self.mainframe, text='Confirm', command=latest_run_deaths)
-        set_latest_credits_button.grid(row=4, column=3, sticky='WE')
+        deaths_input_text = ttk.Label(self.midframe, text='Deaths On Last Run', background='white', font=('Arial', 10))
+        deaths_input_text.grid(row=1, column=2, sticky='W')
+        set_deaths_field = ttk.Entry(self.midframe, width=20)
+        set_deaths_field.grid(row=2, column=2, sticky='W')
+        set_latest_credits_button = ttk.Button(self.midframe, text='Confirm', command=latest_run_deaths)
+        set_latest_credits_button.grid(row=2, column=3, sticky='W')
+
+        # plus one attempt button
+        plus_attempt = ttk.Button(self.midframe, text='+1 Attempt', command=plus_attempt)
+        plus_attempt.grid(row=2, column=4)
+        # <<<Midframe<<<
+
+        # >>>Bottomframeleft>>>
+        self.bottomframe = tk.Frame(self.mainframe, background='white')
+        self.bottomframe.grid(row=2, column=0, sticky='W')
+        # total attempts text
+        total_attempts_text_var = tk.StringVar()
+        total_attempts_text_var.set('Total Attempts: ')
+        total_attempts = ttk.Label(self.bottomframe, textvariable=total_attempts_text_var, background='white')
+        total_attempts.grid(row=3, column=0, sticky='W')
 
         # Total money from selected moon
         selected_moon_total_txt_var = tk.StringVar()
         selected_moon_total_txt_var.set("Total Credits: ")
-        spacer_1 = ttk.Label(self.mainframe, background='white')
-        spacer_1.grid(row=5, column=0)
-        selected_moon_total = ttk.Label(self.mainframe, textvariable=selected_moon_total_txt_var, background='white',
+        selected_moon_total = ttk.Label(self.bottomframe, textvariable=selected_moon_total_txt_var,
+                                        background='white',
                                         font=('Arial', 10))
-        selected_moon_total.grid(row=7, column=0, sticky='W')
+        selected_moon_total.grid(row=1, column=0, sticky='W')
 
         # Total deaths from selected moon
         selected_moon_total_deaths_txt_var = tk.StringVar()
         selected_moon_total_deaths_txt_var.set("Total Deaths: ")
-        selected_moon_total_deaths = ttk.Label(self.mainframe, textvariable=selected_moon_total_deaths_txt_var,
+        selected_moon_total_deaths = ttk.Label(self.bottomframe, textvariable=selected_moon_total_deaths_txt_var,
                                                background='white',
                                                font=('Arial', 10))
-        selected_moon_total_deaths.grid(row=8, column=0, sticky='W')
+        selected_moon_total_deaths.grid(row=2, column=0, sticky='W')
+
+        spacer_3 = ttk.Label(self.bottomframe, background='white', text='                                              '
+                                                                        '               ')
+        spacer_3.grid(row=4, column=0)
 
         # current moon text
         current_moon_text_var = tk.StringVar()
         current_moon_text_var.set("")
-        current_moon_text = ttk.Label(self.mainframe, textvariable=current_moon_text_var, background='white',
+        current_moon_text = ttk.Label(self.bottomframe, textvariable=current_moon_text_var, background='white',
                                       font=('Arial', 18))
-        current_moon_text.grid(row=6, column=0, sticky='W')
-
-        # plus one attempt button
-        total_attempts_text_var = tk.StringVar()
-        total_attempts_text_var.set('Total Attempts: ')
-        plus_attempt = ttk.Button(self.mainframe, text='+1 Attempt', command=plus_attempt)
-        plus_attempt.grid(row=4, column=4)
-        total_attempts = ttk.Label(self.mainframe, textvariable=total_attempts_text_var, background='white')
-        total_attempts.grid(row=9, column=0, sticky='W')
+        current_moon_text.grid(row=0, column=0, sticky='W')
 
         # Average deaths
         def average_deaths():
@@ -413,8 +435,8 @@ class App:
 
         average_deaths_text_var = tk.StringVar()
         average_deaths_text_var.set("Average Deaths: ")
-        average_deaths_label = ttk.Label(self.mainframe, textvariable=average_deaths_text_var, background='white')
-        average_deaths_label.grid(row=8, column=2, sticky='W')
+        average_deaths_label = ttk.Label(self.bottomframe, textvariable=average_deaths_text_var, background='white')
+        average_deaths_label.grid(row=2, column=1, sticky='W')
 
         # Average credit
         def average_credit():
@@ -426,8 +448,9 @@ class App:
 
         average_credits_text_var = tk.StringVar()
         average_credits_text_var.set("Average Credits: ")
-        average_credits_label = ttk.Label(self.mainframe, textvariable=average_credits_text_var, background='white')
-        average_credits_label.grid(row=7, column=2, sticky='W')
+        average_credits_label = ttk.Label(self.bottomframe, textvariable=average_credits_text_var, background='white')
+        average_credits_label.grid(row=1, column=1, sticky='W')
+        # <<<Bottomframe<<<
 
         self.root.mainloop()
         return
