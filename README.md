@@ -9,5 +9,9 @@ LethalStats is a basic User Interface that allows players to input and track the
 - Allow users to subtract values from within the UI in the event of a misinput.
 - Improve UI look and feel.
 - Add more stats to the tracker
+# Known Issues
+- On some systems (mostly linux) the UI has incorrect positioning and doesn't properly appear in the window.
+- The UI doesn't run sometimes because of an error with the TKinter bitmap/.
+  
 
   
