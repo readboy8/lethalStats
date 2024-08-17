@@ -76,7 +76,7 @@ class App:
 
         def load():
             def load1():
-                with open("./saves/totalCredits.lethalstat", "rb") as openfile:
+                with open("./saves/totalCredits.lethalStat", "rb") as openfile:
                     loaded_object = pickle.load(openfile)
                 exp = loaded_object['Experimentation']
                 ass = loaded_object['Assurance']
@@ -105,7 +105,7 @@ class App:
                 update(set_moon_field.get(), 'money')
 
             def load2():
-                with open("./saves/totalDeaths.lethalstat", "rb") as openfile:
+                with open("./saves/totalDeaths.lethalStat", "rb") as openfile:
                     loaded_object = pickle.load(openfile)
                 exp = loaded_object['Experimentation']
                 ass = loaded_object['Assurance']
@@ -134,7 +134,7 @@ class App:
                 update(set_moon_field.get(), 'deaths')
 
             def load3():
-                with open("./saves/totalVisits.lethalstat", "rb") as openfile:
+                with open("./saves/totalVisits.lethalStat", "rb") as openfile:
                     loaded_object = pickle.load(openfile)
                 exp = loaded_object['Experimentation']
                 ass = loaded_object['Assurance']
