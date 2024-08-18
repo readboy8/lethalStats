@@ -318,7 +318,7 @@ class App:
         self.root = tk.Tk()
         self.root.resizable(False, False)
         self.root.geometry('481x250')
-        self.root.iconbitmap('lethalstatslogo.ico')
+        #self.root.iconbitmap('lethalstatslogo.ico')
         self.root.title('LethalStats')
         self.mainframe = tk.Frame(background='white')
         self.mainframe.pack(fill='both', expand=True)
